@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fork Synchronization Monitor</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --success: #16a34a;
+            --warning: #ca8a04;
+            --danger: #dc2626;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        header h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.25rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+        }
+
+        .stat-card .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-card.success .value { color: var(--success); }
+        .stat-card.warning .value { color: var(--warning); }
+        .stat-card.danger .value { color: var(--danger); }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+        }
+
+        .chart-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .table-container {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+            overflow-x: auto;
+        }
+
+        .table-container h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        table.dataTable {
+            font-size: 0.875rem;
+        }
+
+        table.dataTable thead th {
+            background: var(--bg);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .badge-fix { background: #dcfce7; color: #166534; }
+        .badge-feature { background: #dbeafe; color: #1e40af; }
+        .badge-refactor { background: #fef3c7; color: #92400e; }
+        .badge-other { background: #f1f5f9; color: #475569; }
+        .badge-cve { background: #fecaca; color: #991b1b; }
+
+        .confidence-bar {
+            width: 60px;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        .confidence-high { background: var(--success); }
+        .confidence-medium { background: var(--warning); }
+        .confidence-low { background: var(--danger); }
+
+        .commit-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+
+        .commit-link:hover {
+            text-decoration: underline;
+        }
+
+        .recommend-yes { color: var(--success); font-weight: 600; }
+        .recommend-no { color: var(--danger); }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-row select {
+            padding: 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Fork Synchronization Recommendation Monitor</h1>
+            <p>Analyzing sync-ready fork-local commits and their synchronizability potential</p>
+        </header>
+
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="label">Total Commits</div>
+                <div class="value" id="totalCommits">-</div>
+            </div>
+            <div class="stat-card success">
+                <div class="label">Recommended for Sync</div>
+                <div class="value" id="recommendedCount">-</div>
+            </div>
+            <div class="stat-card danger">
+                <div class="label">CVE Fixes</div>
+                <div class="value" id="cveCount">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Unique Fork Repos</div>
+                <div class="value" id="forkCount">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Unique Origin Repos</div>
+                <div class="value" id="originCount">-</div>
+            </div>
+            <div class="stat-card warning">
+                <div class="label">With Test Files</div>
+                <div class="value" id="testCount">-</div>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Classification Categories</h3>
+                <canvas id="categoryChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Promotion Confidence Distribution</h3>
+                <canvas id="confidenceChart"></canvas>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <h3>Commit Recommendations</h3>
+            <div class="filter-row">
+                <select id="categoryFilter">
+                    <option value="">All Categories</option>
+                </select>
+                <select id="recommendFilter">
+                    <option value="">All Recommendations</option>
+                    <option value="TRUE">Recommended</option>
+                    <option value="FALSE">Not Recommended</option>
+                </select>
+                <select id="cveFilter">
+                    <option value="">All CVE Status</option>
+                    <option value="TRUE">Has CVE</option>
+                    <option value="FALSE">No CVE</option>
+                </select>
+            </div>
+            <table id="commitsTable" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Commit</th>
+                        <th>Fork Repo</th>
+                        <th>Origin Repo</th>
+                        <th>Category</th>
+                        <th>CVE</th>
+                        <th>Independent</th>
+                        <th>Recommend</th>
+                        <th>Confidence</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            <p>Data generated for research purposes. Last updated: <span id="lastUpdated">-</span></p>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script>
+        let allData = [];
+        let dataTable = null;
+
+        // Load data
+        async function loadData() {
+            try {
+                const response = await fetch('data.json');
+                allData = await response.json();
+                renderDashboard();
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('tableBody').innerHTML =
+                    '<tr><td colspan="9" style="text-align:center;padding:2rem;">Error loading data. Make sure data.json exists.</td></tr>';
+            }
+        }
+
+        function renderDashboard() {
+            // Stats
+            document.getElementById('totalCommits').textContent = allData.length.toLocaleString();
+            document.getElementById('recommendedCount').textContent =
+                allData.filter(d => d.classification_recommend_for_origin_and_forks === 'TRUE').length.toLocaleString();
+            document.getElementById('cveCount').textContent =
+                allData.filter(d => d.has_cve === 'TRUE').length.toLocaleString();
+            document.getElementById('forkCount').textContent =
+                new Set(allData.map(d => d.fork_repo)).size.toLocaleString();
+            document.getElementById('originCount').textContent =
+                new Set(allData.map(d => d.origin_repo)).size.toLocaleString();
+            document.getElementById('testCount').textContent =
+                allData.filter(d => d.has_test_file === 'TRUE').length.toLocaleString();
+            document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString();
+
+            // Category chart
+            const categories = {};
+            allData.forEach(d => {
+                const cat = d.classification_category || 'Unknown';
+                categories[cat] = (categories[cat] || 0) + 1;
+            });
+
+            new Chart(document.getElementById('categoryChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(categories),
+                    datasets: [{
+                        data: Object.values(categories),
+                        backgroundColor: [
+                            '#22c55e', '#3b82f6', '#f59e0b', '#ef4444',
+                            '#8b5cf6', '#06b6d4', '#ec4899', '#84cc16'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+
+            // Confidence distribution
+            const confBuckets = { '0.9-1.0': 0, '0.8-0.9': 0, '0.7-0.8': 0, '0.6-0.7': 0, '<0.6': 0 };
+            allData.forEach(d => {
+                const conf = parseFloat(d.classification_promotion_confidence) || 0;
+                if (conf >= 0.9) confBuckets['0.9-1.0']++;
+                else if (conf >= 0.8) confBuckets['0.8-0.9']++;
+                else if (conf >= 0.7) confBuckets['0.7-0.8']++;
+                else if (conf >= 0.6) confBuckets['0.6-0.7']++;
+                else confBuckets['<0.6']++;
+            });
+
+            new Chart(document.getElementById('confidenceChart'), {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(confBuckets),
+                    datasets: [{
+                        label: 'Commits',
+                        data: Object.values(confBuckets),
+                        backgroundColor: '#3b82f6'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            // Populate category filter
+            const categoryFilter = document.getElementById('categoryFilter');
+            Object.keys(categories).sort().forEach(cat => {
+                const opt = document.createElement('option');
+                opt.value = cat;
+                opt.textContent = `${cat} (${categories[cat]})`;
+                categoryFilter.appendChild(opt);
+            });
+
+            // Initialize DataTable
+            dataTable = $('#commitsTable').DataTable({
+                data: allData,
+                columns: [
+                    {
+                        data: 'commit_hash',
+                        render: (data, type, row) => {
+                            const shortHash = data ? data.substring(0, 7) : '-';
+                            const url = row.github_commit_url ?
+                                (row.github_commit_url.startsWith('http') ? row.github_commit_url : 'https://' + row.github_commit_url) : '#';
+                            return `<a href="${url}" target="_blank" class="commit-link">${shortHash}</a>`;
+                        }
+                    },
+                    {
+                        data: 'fork_repo',
+                        render: data => `<span title="${data}">${data ? data.split('/').pop() : '-'}</span>`
+                    },
+                    {
+                        data: 'origin_repo',
+                        render: data => `<span title="${data}">${data ? data.split('/').pop() : '-'}</span>`
+                    },
+                    {
+                        data: 'classification_category',
+                        render: data => {
+                            const cls = (data || '').toLowerCase().includes('fix') ? 'fix' :
+                                        (data || '').toLowerCase().includes('feature') ? 'feature' :
+                                        (data || '').toLowerCase().includes('refactor') ? 'refactor' : 'other';
+                            return `<span class="badge badge-${cls}">${data || '-'}</span>`;
+                        }
+                    },
+                    {
+                        data: 'has_cve',
+                        render: data => data === 'TRUE' ? '<span class="badge badge-cve">CVE</span>' : '-'
+                    },
+                    {
+                        data: 'classification_is_independent',
+                        render: data => data === 'TRUE' ? '✓' : '✗'
+                    },
+                    {
+                        data: 'classification_recommend_for_origin_and_forks',
+                        render: data => data === 'TRUE' ?
+                            '<span class="recommend-yes">Yes</span>' :
+                            '<span class="recommend-no">No</span>'
+                    },
+                    {
+                        data: 'classification_promotion_confidence',
+                        render: data => {
+                            const conf = parseFloat(data) || 0;
+                            const cls = conf >= 0.85 ? 'high' : conf >= 0.7 ? 'medium' : 'low';
+                            return `<div class="confidence-bar"><div class="confidence-fill confidence-${cls}" style="width:${conf*100}%"></div></div>
+                                    <small>${(conf*100).toFixed(0)}%</small>`;
+                        }
+                    },
+                    {
+                        data: 'author_date',
+                        render: data => data ? data.split(' ')[0] : '-'
+                    }
+                ],
+                pageLength: 25,
+                order: [[7, 'desc']],
+                language: {
+                    search: "Search:",
+                    lengthMenu: "Show _MENU_ entries"
+                }
+            });
+
+            // Custom filters
+            $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+                const row = allData[dataIndex];
+                const catFilter = document.getElementById('categoryFilter').value;
+                const recFilter = document.getElementById('recommendFilter').value;
+                const cveFilter = document.getElementById('cveFilter').value;
+
+                if (catFilter && row.classification_category !== catFilter) return false;
+                if (recFilter && row.classification_recommend_for_origin_and_forks !== recFilter) return false;
+                if (cveFilter && row.has_cve !== cveFilter) return false;
+
+                return true;
+            });
+
+            document.getElementById('categoryFilter').addEventListener('change', () => dataTable.draw());
+            document.getElementById('recommendFilter').addEventListener('change', () => dataTable.draw());
+            document.getElementById('cveFilter').addEventListener('change', () => dataTable.draw());
+        }
+
+        // Initialize
+        loadData();
+    </script>
+</body>
+</html>
