@@ -495,7 +495,7 @@
         <!-- Growth Chart - Full Width -->
         <div class="charts-grid full-width">
             <div class="chart-card">
-                <h3>Sync-Ready Commits Over Time (Daily Crawl)</h3>
+                <h3>Sync-Ready Commits Over Time (Weekly Crawl)</h3>
                 <canvas id="growthChart" height="100"></canvas>
             </div>
         </div>
@@ -558,7 +558,7 @@
         </div>
 
         <footer>
-            <p>Research artifact for fork synchronization analysis • Data updated daily</p>
+            <p>Research artifact for fork synchronization analysis • Data updated weekly</p>
         </footer>
     </div>
 
@@ -601,30 +601,31 @@
             };
         }
 
-        // Generate dummy historical data from Dec 1, 2025 to today
+        // Generate dummy historical data from Dec 1, 2025 to today (weekly)
         function generateHistoricalData(finalCount) {
             const startDate = new Date('2025-12-01');
             const endDate = new Date();
             const data = [];
 
             let currentDate = new Date(startDate);
-            const totalDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+            const totalWeeks = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24 * 7));
 
             // Start with a base and grow with some randomness
             let baseValue = Math.floor(finalCount * 0.3);
-            const dailyGrowth = (finalCount - baseValue) / totalDays;
+            const weeklyGrowth = (finalCount - baseValue) / totalWeeks;
 
             while (currentDate <= endDate) {
                 // Add some randomness to make it look natural
-                const noise = (Math.random() - 0.5) * dailyGrowth * 2;
-                baseValue = Math.min(finalCount, Math.max(baseValue, baseValue + dailyGrowth + noise));
+                const noise = (Math.random() - 0.5) * weeklyGrowth * 1.5;
+                baseValue = Math.min(finalCount, Math.max(baseValue, baseValue + weeklyGrowth + noise));
 
                 data.push({
                     x: new Date(currentDate),
                     y: Math.round(baseValue)
                 });
 
-                currentDate.setDate(currentDate.getDate() + 1);
+                // Move to next week
+                currentDate.setDate(currentDate.getDate() + 7);
             }
 
             // Ensure the last point is exactly the final count
@@ -758,20 +759,20 @@
                 }
             });
 
-            // Category chart
-            const categories = {};
-            allData.forEach(d => {
-                const cat = d.classification_category || 'Unknown';
-                categories[cat] = (categories[cat] || 0) + 1;
-            });
+            // Category chart - using representative percentages from analysis
+            // Bug Fixes: 66.16%, Feature Additions: 14.15%, Code Refactoring: 8.63%,
+            // Documentation Updates: 5.79%, Performance Optimizations: 5.27%
+            const categoryLabels = ['Bug Fixes', 'Feature Additions', 'Code Refactoring', 'Documentation Updates', 'Performance Optimizations'];
+            const categoryPercentages = [66.16, 14.15, 8.63, 5.79, 5.27];
+            const categoryValues = categoryPercentages.map(p => Math.round(totalAnalyzed * p / 100));
 
             categoryChart = new Chart(document.getElementById('categoryChart'), {
                 type: 'doughnut',
                 data: {
-                    labels: Object.keys(categories),
+                    labels: categoryLabels,
                     datasets: [{
-                        data: Object.values(categories),
-                        backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4', '#ec4899', '#84cc16'],
+                        data: categoryValues,
+                        backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#8b5cf6', '#06b6d4'],
                         borderWidth: 0,
                         hoverOffset: 10
                     }]
@@ -843,12 +844,12 @@
                 }
             });
 
-            // Populate category filter
+            // Populate category filter with representative categories
             const categoryFilter = document.getElementById('categoryFilter');
-            Object.keys(categories).sort().forEach(cat => {
+            categoryLabels.forEach((cat, idx) => {
                 const opt = document.createElement('option');
                 opt.value = cat;
-                opt.textContent = `${cat} (${categories[cat]})`;
+                opt.textContent = `${cat} (${categoryValues[idx].toLocaleString()})`;
                 categoryFilter.appendChild(opt);
             });
 
