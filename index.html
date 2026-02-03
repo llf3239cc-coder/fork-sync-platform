@@ -637,6 +637,7 @@
 
         <footer>
             <p>Research artifact for fork synchronization analysis • Data updated weekly</p>
+            <p>Research artifact for fork synchronization analysis • Data updated weekly</p>
         </footer>
     </div>
 
@@ -679,6 +680,7 @@
         }
 
         // Generate dummy historical data from Dec 1, 2025 to today (weekly)
+        // Generate dummy historical data from Dec 1, 2025 to today (weekly)
         function generateHistoricalData(finalCount) {
             const startDate = new Date('2025-12-01');
             const endDate = new Date();
@@ -686,13 +688,17 @@
 
             let currentDate = new Date(startDate);
             const totalWeeks = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24 * 7));
+            const totalWeeks = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24 * 7));
 
             // Start with a base and grow with some randomness
             let baseValue = Math.floor(finalCount * 0.3);
             const weeklyGrowth = (finalCount - baseValue) / totalWeeks;
+            const weeklyGrowth = (finalCount - baseValue) / totalWeeks;
 
             while (currentDate <= endDate) {
                 // Add some randomness to make it look natural
+                const noise = (Math.random() - 0.5) * weeklyGrowth * 1.5;
+                baseValue = Math.min(finalCount, Math.max(baseValue, baseValue + weeklyGrowth + noise));
                 const noise = (Math.random() - 0.5) * weeklyGrowth * 1.5;
                 baseValue = Math.min(finalCount, Math.max(baseValue, baseValue + weeklyGrowth + noise));
 
@@ -701,6 +707,8 @@
                     y: Math.round(baseValue)
                 });
 
+                // Move to next week
+                currentDate.setDate(currentDate.getDate() + 7);
                 // Move to next week
                 currentDate.setDate(currentDate.getDate() + 7);
             }
@@ -861,12 +869,21 @@
             const categoryLabels = ['Bug Fixes', 'Feature Additions', 'Code Refactoring', 'Documentation Updates', 'Performance Optimizations'];
             const categoryPercentages = [66.16, 14.15, 8.63, 5.79, 5.27];
             const categoryValues = categoryPercentages.map(p => Math.round(totalAnalyzed * p / 100));
+            // Category chart - using representative percentages from analysis
+            // Bug Fixes: 66.16%, Feature Additions: 14.15%, Code Refactoring: 8.63%,
+            // Documentation Updates: 5.79%, Performance Optimizations: 5.27%
+            const categoryLabels = ['Bug Fixes', 'Feature Additions', 'Code Refactoring', 'Documentation Updates', 'Performance Optimizations'];
+            const categoryPercentages = [66.16, 14.15, 8.63, 5.79, 5.27];
+            const categoryValues = categoryPercentages.map(p => Math.round(totalAnalyzed * p / 100));
 
             categoryChart = new Chart(document.getElementById('categoryChart'), {
                 type: 'doughnut',
                 data: {
                     labels: categoryLabels,
+                    labels: categoryLabels,
                     datasets: [{
+                        data: categoryValues,
+                        backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#8b5cf6', '#06b6d4'],
                         data: categoryValues,
                         backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#8b5cf6', '#06b6d4'],
                         borderWidth: 0,
@@ -951,10 +968,13 @@
             }
 
             // Populate category filter with representative categories
+            // Populate category filter with representative categories
             const categoryFilter = document.getElementById('categoryFilter');
+            categoryLabels.forEach((cat, idx) => {
             categoryLabels.forEach((cat, idx) => {
                 const opt = document.createElement('option');
                 opt.value = cat;
+                opt.textContent = `${cat} (${categoryValues[idx].toLocaleString()})`;
                 opt.textContent = `${cat} (${categoryValues[idx].toLocaleString()})`;
                 categoryFilter.appendChild(opt);
             });
