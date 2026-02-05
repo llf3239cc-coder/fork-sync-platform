@@ -2,6 +2,8 @@
 
 Interactive dashboard for viewing fork synchronization recommendations.
 
+The source files are located in `src` with guideline to reproduce at `src/RUN_FLOW.md`. 
+
 ## Setup Instructions
 
 ### 1. Generate the data file
