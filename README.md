@@ -2,6 +2,8 @@
 
 Interactive dashboard for viewing fork synchronization recommendations.
 
+
+## Paper Reproduction
 The source files for the paper-specific modules are located in `src` with guideline to reproduce at `src/RUN_FLOW.md`. 
 
 ## Setup Instructions
