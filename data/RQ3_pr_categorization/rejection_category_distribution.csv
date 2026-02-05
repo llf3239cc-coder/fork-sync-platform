@@ -1,0 +1,17 @@
+Category,Count,Percentage
+Superseded/Duplicate,1232,24.6
+Process Issues,1204,24.1
+Maintainer Policy Decision,836,16.7
+Insufficient Information,583,11.7
+Code Quality Issues,523,10.5
+Project Fit Mismatch,312,6.2
+Wrong Project Submission,109,2.2
+Incomplete Implementation,69,1.4
+Technical Issues,51,1.0
+Communication Issues,45,0.9
+Release Timing Issues,13,0.3
+Project Status Issues,7,0.1
+Legal/Licensing Concerns,5,0.1
+Security Concerns,5,0.1
+Experimental/PoC,5,0.1
+Other Reasons,1,0.0

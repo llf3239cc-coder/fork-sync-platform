@@ -1,0 +1,9 @@
+Pattern,Count,Percentage
+None,50434,31.82%
+Developer Batching,5317,3.35%
+Maintainer Review,7257,4.58%
+Fork Pulling,75130,47.41%
+"Developer Batching,Maintainer Review",1505,0.95%
+"Developer Batching,Fork Pulling",5848,3.69%
+"Maintainer Review,Fork Pulling",11236,7.09%
+"Developer Batching,Maintainer Review,Fork Pulling",1758,1.11%

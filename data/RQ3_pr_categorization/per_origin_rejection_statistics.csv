@@ -1,0 +1,287 @@
+origin repo,rejected_pr_count,most_common_rejection,potentially_mergeable,technical_issues,fit_issues
+notepad-plus-plus/notepad-plus-plus,392,Insufficient Information,154,61,0
+tensorflow/tensorflow,358,Process Issues,134,42,18
+micropython/micropython,332,Maintainer Policy Decision,44,21,20
+musescore/MuseScore,290,Superseded/Duplicate,82,54,30
+openwrt/openwrt,277,Maintainer Policy Decision,69,56,22
+bitcoin/bitcoin,235,Superseded/Duplicate,61,49,42
+xbmc/xbmc,188,Superseded/Duplicate,61,68,27
+facebook/react-native,183,Maintainer Policy Decision,32,18,15
+PixarAnimationStudios/OpenUSD,150,Maintainer Policy Decision,53,17,12
+FreeCAD/FreeCAD,135,Maintainer Policy Decision,15,15,5
+MarlinFirmware/Marlin,131,Process Issues,62,23,18
+systemd/systemd,96,Superseded/Duplicate,12,28,5
+obsproject/obs-studio,94,Insufficient Information,51,21,13
+godotengine/godot,78,Superseded/Duplicate,24,24,7
+dolphin-emu/dolphin,75,Code Quality Issues,25,25,11
+openzfs/zfs,75,Superseded/Duplicate,44,23,7
+BVLC/caffe,73,Superseded/Duplicate,24,11,4
+TrinityCore/TrinityCore,59,Process Issues,28,13,6
+netdata/netdata,47,Superseded/Duplicate,18,7,4
+ariya/phantomjs,45,Maintainer Policy Decision,5,5,1
+prusa3d/PrusaSlicer,44,Maintainer Policy Decision,16,10,1
+qmk/qmk_firmware,42,Process Issues,24,9,4
+diasurgical/devilution,41,Insufficient Information,17,13,0
+microsoft/onnxruntime,40,Process Issues,22,4,3
+ArduPilot/ardupilot,39,Maintainer Policy Decision,9,9,0
+RPCS3/rpcs3,39,Code Quality Issues,21,14,1
+cocos2d/cocos2d-x,37,Process Issues,13,2,0
+redis/redis,35,Process Issues,9,2,9
+Klipper3d/klipper,32,Maintainer Policy Decision,6,5,2
+shadps4-emu/shadPS4,31,Code Quality Issues,17,18,3
+SFML/SFML,29,Superseded/Duplicate,9,5,9
+azerothcore/azerothcore-wotlk,28,Superseded/Duplicate,6,4,0
+flipperdevices/flipperzero-firmware,26,Process Issues,8,7,7
+rethinkdb/rethinkdb,25,Maintainer Policy Decision,1,2,0
+doitsujin/dxvk,24,Superseded/Duplicate,5,6,5
+apache/mxnet,24,Insufficient Information,12,4,3
+openssl/openssl,23,Maintainer Policy Decision,1,0,1
+Tencent/ncnn,23,Insufficient Information,12,3,0
+collectd/collectd,22,Superseded/Duplicate,9,9,0
+x64dbg/x64dbg,20,Maintainer Policy Decision,8,7,1
+mruby/mruby,19,Superseded/Duplicate,6,1,3
+boostorg/beast,19,Insufficient Information,6,0,0
+SynoCommunity/spksrc,18,Project Fit Mismatch,5,6,8
+owasp-modsecurity/ModSecurity,17,Superseded/Duplicate,1,1,1
+PCSX2/pcsx2,17,Superseded/Duplicate,5,6,2
+rizonesoft/Notepad3,17,Process Issues,6,3,0
+swiftlang/swift,17,Process Issues,5,7,2
+wled/WLED,16,Process Issues,6,2,1
+rime/weasel,16,Process Issues,14,7,1
+labwc/labwc,15,Superseded/Duplicate,3,3,3
+ggml-org/llama.cpp,15,Process Issues,6,3,0
+hanwckf/rt-n56u,15,Process Issues,9,1,1
+ValveSoftware/Proton,14,Process Issues,3,1,4
+arendst/Tasmota,14,Process Issues,4,1,0
+78/xiaozhi-esp32,14,Process Issues,9,3,0
+LizardByte/Sunshine,14,Superseded/Duplicate,7,7,0
+opa334/Dopamine,13,Process Issues,5,0,3
+bkaradzic/bgfx,13,Code Quality Issues,4,5,2
+ARMmbed/mbed-os,13,Process Issues,4,0,4
+ish-app/ish,13,Process Issues,7,0,2
+openssh/openssh-portable,12,Process Issues,4,1,4
+melonDS-emu/melonDS,12,Process Issues,4,2,2
+ValveSoftware/source-sdk-2013,11,Insufficient Information,6,1,3
+ossrs/srs,11,Process Issues,4,0,1
+mapbox/mapbox-gl-native,11,Project Fit Mismatch,4,1,5
+karpathy/llama2.c,11,Maintainer Policy Decision,3,1,2
+facebook/rocksdb,11,Process Issues,5,0,4
+hyprwm/Hyprland,11,Code Quality Issues,9,10,0
+xenia-project/xenia,11,Process Issues,4,3,0
+chocolate-doom/chocolate-doom,10,Wrong Project Submission,1,1,4
+BespokeSynth/BespokeSynth,10,Process Issues,3,3,0
+raspberrypi/linux,10,Code Quality Issues,4,4,1
+qemu/qemu,10,Process Issues,4,0,0
+telegramdesktop/tdesktop,10,Process Issues,3,0,0
+pjreddie/darknet,10,Process Issues,4,0,1
+ntop/nDPI,9,Insufficient Information,6,3,0
+official-stockfish/Stockfish,9,Insufficient Information,3,2,1
+betaflight/betaflight,9,Process Issues,6,3,1
+LuaJIT/LuaJIT,8,Process Issues,4,2,1
+yshui/picom,8,Superseded/Duplicate,3,2,0
+microsoft/winfile,8,Communication Issues,1,1,0
+ethereum/aleth,8,Process Issues,1,3,1
+xmrig/xmrig,8,Wrong Project Submission,4,1,3
+pret/pokeemerald,8,Process Issues,3,0,2
+EOSIO/eos,8,Process Issues,2,0,2
+raulmur/ORB_SLAM2,8,Process Issues,3,1,0
+libimobiledevice/libimobiledevice,8,Insufficient Information,4,0,0
+lewissbaker/cppcoro,7,Process Issues,2,0,0
+n64decomp/sm64,7,Wrong Project Submission,0,0,6
+jerryscript-project/jerryscript,7,Superseded/Duplicate,1,1,0
+bvschaik/julius,7,Process Issues,2,1,1
+wjakob/nanogui,7,Insufficient Information,5,1,2
+zcash/zcash,7,Wrong Project Submission,0,0,6
+snes9xgit/snes9x,7,Process Issues,4,1,0
+b4winckler/macvim,7,Maintainer Policy Decision,1,0,1
+FFmpeg/FFmpeg,7,Process Issues,2,0,0
+NixOS/nix,6,Code Quality Issues,5,4,0
+justcallmekoko/ESP32Marauder,6,Insufficient Information,5,2,0
+coolsnowwolf/lede,6,Process Issues,1,0,0
+memcached/memcached,6,Maintainer Policy Decision,1,0,1
+pymumu/smartdns,6,Process Issues,2,1,0
+google/skia,6,Process Issues,2,0,0
+mpc-hc/mpc-hc,6,Process Issues,4,0,0
+kdrag0n/safetynet-fix,5,Superseded/Duplicate,2,2,1
+NVIDIA/cutlass,5,Process Issues,1,0,2
+taichi-dev/taichi,5,Process Issues,2,0,0
+iree-org/iree,5,Process Issues,1,0,0
+grbl/grbl,5,Process Issues,1,0,1
+git/git,5,Process Issues,1,0,0
+AutoHotkey/AutoHotkey,5,Superseded/Duplicate,2,0,0
+OrcaSlicer/OrcaSlicer,5,Process Issues,3,1,0
+madMAx43v3r/chia-plotter,5,Process Issues,2,0,1
+arut/nginx-rtmp-module,5,Process Issues,4,1,0
+Kitware/CMake,5,Process Issues,1,0,1
+FWGS/xash3d-fwgs,5,Process Issues,1,1,0
+mpaland/printf,5,Process Issues,2,1,0
+opencv/opencv,5,Project Fit Mismatch,3,1,2
+immortalwrt/immortalwrt,4,Process Issues,3,0,0
+google/zopfli,4,Code Quality Issues,3,2,0
+LumaTeam/Luma3DS,4,Insufficient Information,1,1,0
+intel/hyperscan,4,Project Fit Mismatch,1,0,2
+slic3r/Slic3r,4,Superseded/Duplicate,2,3,0
+DarkFlippers/unleashed-firmware,4,Process Issues,0,0,0
+medusalix/xone,4,Process Issues,2,0,0
+microsoft/AirSim,4,Process Issues,1,0,0
+microsoft/DirectXShaderCompiler,4,Communication Issues,2,1,0
+InfiniTimeOrg/InfiniTime,4,Process Issues,2,0,0
+qbittorrent/qBittorrent,4,Communication Issues,2,1,0
+zmkfirmware/zmk,4,Superseded/Duplicate,0,0,2
+coreboot/coreboot,4,Process Issues,3,0,0
+OpenSC/OpenSC,4,Superseded/Duplicate,0,0,0
+deskflow/deskflow,4,Superseded/Duplicate,0,0,1
+endless-sky/endless-sky,4,Project Fit Mismatch,1,0,2
+PX4/PX4-Autopilot,4,Process Issues,1,0,1
+envoyproxy/envoy,4,Process Issues,3,0,1
+brndnmtthws/conky,4,Process Issues,3,0,0
+brunodev85/winlator,4,Process Issues,1,0,1
+dmlc/xgboost,4,Process Issues,2,0,0
+keepassx/keepassx,3,Code Quality Issues,1,2,0
+tomojitakasu/RTKLIB,3,Insufficient Information,2,0,0
+TASEmulators/desmume,3,Process Issues,1,0,0
+madler/zlib,3,Process Issues,1,0,1
+crosire/reshade,3,Superseded/Duplicate,0,0,0
+the-tcpdump-group/libpcap,3,Process Issues,2,0,0
+monero-project/monero,3,Wrong Project Submission,0,0,3
+microsoft/calculator,3,Process Issues,1,0,1
+Proxmark/proxmark3,3,Process Issues,2,0,1
+moonlight-stream/moonlight-android,3,Communication Issues,0,0,0
+checkra1n/PongoOS,3,Insufficient Information,2,0,0
+skypjack/entt,3,Insufficient Information,2,0,0
+abrasive/shairport,3,Process Issues,1,0,0
+opentoonz/opentoonz,3,Superseded/Duplicate,0,0,0
+EtchedPixels/FUZIX,3,Process Issues,3,1,0
+adafruit/Adafruit-GFX-Library,3,Process Issues,0,0,1
+qTox/qTox,3,Project Fit Mismatch,0,1,1
+k4zmu2a/SpaceCadetPinball,3,Project Fit Mismatch,0,0,3
+pybind/pybind11,3,Process Issues,2,1,0
+flame/blis,3,Process Issues,1,0,0
+id-Software/Quake-III-Arena,3,Process Issues,1,0,2
+id-Software/DOOM-3-BFG,3,Process Issues,0,0,0
+tdlib/telegram-bot-api,2,Process Issues,1,0,0
+ggreer/the_silver_searcher,2,Process Issues,1,0,0
+gnea/grbl,2,Superseded/Duplicate,0,0,0
+86Box/86Box,2,Process Issues,1,0,0
+swaywm/sway,2,Project Fit Mismatch,0,0,1
+osqzss/gps-sdr-sim,2,Process Issues,1,0,1
+R3nzTheCodeGOD/R3nzSkin,2,Project Fit Mismatch,0,0,1
+isl-org/Open3D,2,Process Issues,2,1,0
+CMU-Perceptual-Computing-Lab/openpose,2,Insufficient Information,1,0,0
+stenzek/duckstation,2,Process Issues,2,1,0
+OpenMW/openmw,2,Maintainer Policy Decision,1,0,0
+BruceDevices/firmware,2,Insufficient Information,1,0,0
+TheWover/donut,2,Project Fit Mismatch,1,0,1
+cesanta/mongoose,2,Project Fit Mismatch,0,0,1
+bilibili/ijkplayer,2,Insufficient Information,0,0,0
+cartographer-project/cartographer,2,Process Issues,0,0,1
+xiph/rnnoise,2,Process Issues,1,1,0
+Genymobile/scrcpy,2,Process Issues,1,0,0
+FluidSynth/fluidsynth,2,Code Quality Issues,1,2,1
+google/guetzli,2,Process Issues,1,1,0
+Overv/VulkanTutorial,2,Project Fit Mismatch,1,0,1
+google/honggfuzz,2,Project Fit Mismatch,1,0,1
+pqrs-org/Karabiner-Elements,2,Superseded/Duplicate,0,0,0
+Arduino-IRremote/Arduino-IRremote,2,Code Quality Issues,1,2,0
+darkk/redsocks,2,Process Issues,1,0,0
+ps2homebrew/Open-PS2-Loader,2,Wrong Project Submission,1,0,1
+justadudewhohacks/opencv4nodejs,2,Process Issues,1,0,0
+electron/electron,2,Process Issues,0,0,0
+tzapu/WiFiManager,2,Maintainer Policy Decision,0,0,0
+irungentoo/toxcore,2,Process Issues,0,0,0
+PrismLauncher/PrismLauncher,2,Process Issues,1,0,1
+ton-blockchain/ton,2,Wrong Project Submission,0,0,1
+davatorium/rofi,2,Project Fit Mismatch,1,0,1
+wine-mirror/wine,2,Process Issues,1,0,0
+tmk/tmk_keyboard,2,Process Issues,1,0,0
+lightvector/KataGo,2,Maintainer Policy Decision,0,0,0
+tjanczuk/edge,2,Wrong Project Submission,0,0,1
+lsalzman/enet,2,Communication Issues,1,0,0
+tindy2013/subconverter,2,Process Issues,0,0,0
+facebook/hermes,2,Code Quality Issues,1,1,0
+tianocore/edk2,2,Process Issues,0,0,0
+PerformanC/ReZygisk,2,Project Fit Mismatch,0,0,1
+The-Powder-Toy/The-Powder-Toy,2,Superseded/Duplicate,0,0,0
+Chikage0o0/Linux-NetSpeed,1,Process Issues,0,0,0
+antirez/dump1090,1,Maintainer Policy Decision,0,0,0
+Tencent/rapidjson,1,Process Issues,0,0,0
+Redot-Engine/redot-engine,1,Project Fit Mismatch,0,0,1
+apache/mesos,1,Insufficient Information,1,0,0
+rmtheis/tess-two,1,Insufficient Information,0,0,0
+alexkay/spek,1,Superseded/Duplicate,0,0,0
+valkey-io/valkey,1,Process Issues,0,0,0
+schwabe/ics-openvpn,1,Project Fit Mismatch,0,0,1
+VCVRack/Rack,1,Incomplete Implementation,1,1,0
+v8/v8,1,Process Issues,0,0,0
+ufrisk/pcileech,1,Process Issues,0,0,0
+vysheng/tg,1,Process Issues,1,0,0
+wireshark/wireshark,1,Process Issues,1,0,0
+PlatformLab/NanoLog,1,Process Issues,0,0,0
+UZ-SLAMLab/ORB_SLAM3,1,Process Issues,0,0,0
+tectonic-typesetting/tectonic,1,Process Issues,0,0,0
+TsudaKageyu/minhook,1,Superseded/Duplicate,0,1,0
+Atmosphere-NX/Atmosphere,1,Process Issues,0,0,0
+shadowsocks/simple-obfs,1,Process Issues,0,0,0
+Airblader/i3,1,Project Fit Mismatch,0,0,1
+strongswan/strongswan,1,Project Fit Mismatch,0,1,1
+AGWA/git-crypt,1,Maintainer Policy Decision,0,0,0
+stefanesser/dumpdecrypted,1,Insufficient Information,0,0,0
+solokeys/solo1,1,Superseded/Duplicate,0,0,0
+Z3Prover/z3,1,Process Issues,1,0,0
+ZBar/ZBar,1,Process Issues,0,0,0
+BandarHL/BHTwitter,1,Process Issues,0,0,1
+gentilkiwi/mimikatz,1,Project Fit Mismatch,0,0,1
+FastLED/FastLED,1,Process Issues,0,0,0
+argotorg/solidity,1,Wrong Project Submission,0,0,1
+memononen/nanovg,1,Project Fit Mismatch,0,0,1
+me-no-dev/ESPAsyncWebServer,1,Process Issues,0,0,0
+mattn/go-sqlite3,1,Superseded/Duplicate,0,0,0
+damonkohler/sl4a,1,Process Issues,0,0,0
+liuliu/ccv,1,Wrong Project Submission,0,0,1
+libsdl-org/SDL,1,Superseded/Duplicate,0,0,0
+lava/matplotlib-cpp,1,Maintainer Policy Decision,0,0,0
+knolleary/pubsubclient,1,Wrong Project Submission,0,0,1
+diasurgical/DevilutionX,1,Maintainer Policy Decision,0,0,0
+OSGeo/gdal,1,Process Issues,0,0,0
+jonls/redshift,1,Superseded/Duplicate,0,0,0
+jedisct1/libsodium,1,Project Fit Mismatch,1,0,1
+iovisor/bcc,1,Superseded/Duplicate,0,0,0
+esphome/esphome,1,Process Issues,1,0,0
+hrydgard/ppsspp,1,Incomplete Implementation,1,1,0
+hku-mars/FAST-LIVO2,1,Incomplete Implementation,1,1,0
+hishamhm/htop,1,Process Issues,0,0,0
+greatscottgadgets/hackrf,1,Code Quality Issues,1,1,0
+facebook/igl,1,Process Issues,0,0,0
+gqrx-sdr/gqrx,1,Maintainer Policy Decision,0,0,0
+NVIDIA/FasterTransformer,1,Code Quality Issues,1,1,0
+ffmpegwasm/ffmpeg.wasm,1,Process Issues,0,0,0
+MultiMC/Launcher,1,Process Issues,0,0,1
+fulldecent/system-bus-radio,1,Superseded/Duplicate,0,0,0
+contiki-os/contiki,1,Insufficient Information,0,0,0
+mgba-emu/mgba,1,Communication Issues,1,0,0
+progschj/ThreadPool,1,Maintainer Policy Decision,0,0,0
+cjdelisle/cjdns,1,Superseded/Duplicate,0,0,0
+praydog/UEVR,1,Process Issues,1,0,0
+polybar/polybar,1,Incomplete Implementation,1,1,0
+audacity/audacity,1,Maintainer Policy Decision,0,0,0
+php/php-src,1,Maintainer Policy Decision,0,0,0
+ExpressLRS/ExpressLRS,1,Process Issues,0,0,0
+baldurk/renderdoc,1,Maintainer Policy Decision,0,0,0
+bellard/quickjs,1,Process Issues,1,0,0
+openframeworks/openFrameworks,1,Process Issues,0,0,0
+opencv/opencv_contrib,1,Superseded/Duplicate,0,0,0
+octalmage/robotjs,1,Insufficient Information,0,0,0
+ggml-org/ggml,1,Superseded/Duplicate,0,0,0
+carla-simulator/carla,1,Process Issues,1,0,0
+nanocurrency/nano-node,1,Process Issues,0,0,0
+HKUST-Aerial-Robotics/VINS-Mono,1,Process Issues,1,0,0
+chenshuo/muduo,1,Superseded/Duplicate,0,0,0
+mozilla/DeepSpeech,1,Process Issues,1,0,0
+moonlight-stream/moonlight-qt,1,Process Issues,1,0,0
+mongodb/mongo,1,Superseded/Duplicate,0,0,0
+mit-pdos/xv6-public,1,Project Status Issues,0,0,1
+chjj/compton,1,Insufficient Information,1,0,0
+Kitt-AI/snowboy,1,Process Issues,1,0,0
+cinder/Cinder,1,Incomplete Implementation,1,0,0
+microsoft/DirectX-Graphics-Samples,1,Code Quality Issues,0,1,1
+SoftEtherVPN/SoftEtherVPN,1,Superseded/Duplicate,0,0,0

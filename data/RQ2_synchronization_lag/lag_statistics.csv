@@ -1,0 +1,4 @@
+Lag Type,Description,N (%),Median,Mean (SD),P75,P90,P95,Max
+Developer Batching,Developer batching delay,14428 (9.1%),32.00d,120.6 (292.0)d,107.3d,311.6d,550.6d,17761d
+Maintainer Review,Maintainer review delay,21756 (13.7%),46.41d,137.1 (259.0)d,131.9d,368.2d,630.0d,4228d
+Fork Pulling,Fork pulling delay,93972 (59.3%),6.79d,11.5 (16.0)d,15.6d,28.9d,31.2d,714d

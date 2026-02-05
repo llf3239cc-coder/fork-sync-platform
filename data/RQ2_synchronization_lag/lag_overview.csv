@@ -1,0 +1,4 @@
+Lag Type,Count,Prevalence (%),Median (days),Mean (days),Std Dev (days),P25 (days),P75 (days),P90 (days),P95 (days),Max (days),>7 days (%),>30 days (%),>90 days (%)
+Developer Batching Lag,14428,9.10,32.00,120.59,292.00,8.59,107.31,311.56,550.63,17761,78.5,51.5,28.3
+Maintainer Review Lag,21756,13.73,46.41,137.09,259.02,13.62,131.92,368.25,629.98,4228,86.2,59.4,33.0
+Fork Pulling Lag,93972,59.29,6.79,11.53,15.99,2.68,15.58,28.87,31.18,714,49.6,6.6,0.1

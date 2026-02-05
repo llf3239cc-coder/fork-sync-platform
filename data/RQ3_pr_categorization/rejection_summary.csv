@@ -1,0 +1,14 @@
+Metric,Value
+Total Rejected PRs,5000
+Unique Origins,286
+Unique Forks,516
+Top 10 Origins Share,50.8%
+Top 10 Forks Share,38.7%
+PRs with Technical Issues,865 (17.3%)
+PRs with Communication Issues,275 (5.5%)
+PRs with Project Fit Issues,468 (9.4%)
+PRs Potentially Mergeable Later,"1,608 (32.2%)"
+Mean Commits per Rejected PR,21.9
+Median Commits per Rejected PR,5
+PRs with Review Comments,"1,058 (35.2%)"
+PRs with Issue Comments,"4,035 (94.8%)"

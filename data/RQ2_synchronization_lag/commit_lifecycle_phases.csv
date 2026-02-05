@@ -1,0 +1,5 @@
+Phase,Median (days),90th pct (days),Lag Prevalence
+Developer Batching,0.01,5.34,9.1%
+Maintainer Review,0.85,26.85,13.7%
+Fork Propagation,2.31,18.294000000000022,38.8%
+TOTAL,3.17,50.48400000000002,-

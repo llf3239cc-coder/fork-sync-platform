@@ -1,0 +1,45 @@
+index,name,type
+0,Documentation & Tests,group
+1,Code Quality,group
+2,Feature Development,group
+3,Customization,group
+4,Build & Deploy,group
+5,Bug & Security Fixes,group
+6,Maintenance,group
+7,Documentation Update,category
+8,Code Refactoring,category
+9,Feature Addition,category
+10,Project-Specific Modification,category
+11,Dependency Upgrade,category
+12,Bug Fix,category
+13,Platform-Specific Modification,category
+14,Test Related,category
+15,Build / CI Related,category
+16,Compatibility Fix,category
+17,Performance Optimization,category
+18,Localization,category
+19,Debugging Enhancement,category
+20,UI/UX Improvement,category
+21,Configuration Change,category
+22,Security Enhancement,category
+23,Code Cleanup,category
+24,Compiler Fix,category
+25,Safety Enhancement,category
+26,Minor Enhancement,category
+27,Release Preparation,category
+28,API Change,category
+29,Feature Removal,category
+30,Error Handling,category
+31,Experimental Feature,category
+32,Coding Style,category
+33,Memory Optimization,category
+34,License Change,category
+35,Rebranding,category
+36,Accessibility Enhancement,category
+37,Privacy Enhancement,category
+38,Feature Enhancement,category
+39,Keyboard (addition or update),category
+40,Keyboard,category
+41,Deprecation,category
+42,Example,category
+43,Architecture Change,category

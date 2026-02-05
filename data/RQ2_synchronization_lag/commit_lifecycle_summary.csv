@@ -1,0 +1,12 @@
+Metric,Value
+Phase 1 Median (days),0.02
+Phase 1 Mean (days),15.39
+Phase 1 90th pct,25.45
+Phase 2 Median (days),0.00
+Phase 2 Mean (days),0.00
+Phase 2 90th pct,0.00
+Total Median (days),0.02
+Total Mean (days),15.39
+Total 90th pct,25.45
+Commits with >7d lag (%),19.8
+Commits syncing <1d (%),64.9

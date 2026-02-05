@@ -1,0 +1,16 @@
+Metric,Value
+Total Origins Analyzed,977
+Total Commits (All Forks),4520509
+Commits in PRs,1529357
+Fork-Only Commits,2991152
+Mean PR Coverage,18.38%
+Median PR Coverage,6.92%
+Std Dev PR Coverage,24.93%
+Origins with <10% Coverage,547
+Origins with 10-50% Coverage,295
+Origins with ≥50% Coverage,135
+Origins with Majority Unsynchronized (>50% not in PRs),842
+% of All Commits NOT in PRs,66.17%
+Q1 (25th percentile),0.00%
+Q2 (50th percentile),6.92%
+Q3 (75th percentile),27.59%

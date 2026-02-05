@@ -1,0 +1,15 @@
+Metric,Value
+Total Forks Analyzed,326
+Total PRs Submitted,30000
+Total PRs Merged,27034
+Overall Merge Rate,0.9011
+Mean PRs per Fork,92.02
+Median PRs per Fork,5.00
+Mean Merge Rate per Fork,0.8609
+Median Merge Rate per Fork,0.9900
+Forks with 0 Merged PRs,13
+% Forks with 0 Merged PRs,3.99%
+Forks with 100% Merge Rate,161
+% Forks with 100% Merge Rate,49.39%
+Forks with Partial Merges,152
+% Forks with Partial Merges,46.63%

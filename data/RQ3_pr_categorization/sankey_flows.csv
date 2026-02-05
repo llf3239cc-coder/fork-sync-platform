@@ -1,0 +1,38 @@
+category_group,classification.category,count
+Bug & Security Fixes,Bug Fix,10927
+Bug & Security Fixes,Compatibility Fix,585
+Bug & Security Fixes,Compiler Fix,506
+Bug & Security Fixes,Security Enhancement,242
+Bug & Security Fixes,Error Handling,72
+Bug & Security Fixes,Safety Enhancement,50
+Build & Deploy,Build / CI Related,1267
+Build & Deploy,Dependency Upgrade,641
+Build & Deploy,Configuration Change,607
+Build & Deploy,Release Preparation,83
+Code Quality,Code Refactoring,2590
+Code Quality,Performance Optimization,1580
+Code Quality,Memory Optimization,178
+Code Quality,Code Cleanup,135
+Code Quality,Coding Style,34
+Code Quality,Architecture Change,13
+Customization,Platform-Specific Modification,1099
+Customization,Project-Specific Modification,602
+Customization,Localization,335
+Customization,Keyboard,188
+Customization,Keyboard (addition or update),11
+Documentation & Tests,Documentation Update,1736
+Documentation & Tests,Test Related,590
+Documentation & Tests,Debugging Enhancement,271
+Documentation & Tests,Example,45
+Feature Development,Feature Addition,4244
+Feature Development,UI/UX Improvement,980
+Feature Development,Minor Enhancement,56
+Feature Development,Feature Enhancement,21
+Feature Development,Experimental Feature,20
+Maintenance,API Change,181
+Maintenance,Feature Removal,80
+Maintenance,License Change,24
+Maintenance,Accessibility Enhancement,2
+Maintenance,Deprecation,2
+Maintenance,Rebranding,2
+Maintenance,Privacy Enhancement,1
