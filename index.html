@@ -633,6 +633,24 @@
             </table>
         </div>
 
+        <div class="table-container" id="prSubmissionsSection" style="margin-top: 2rem;">
+            <div class="table-header">
+                <h3>Submitted Pull Requests</h3>
+                <span style="font-size: 0.85rem; color: var(--text-secondary);">PRs submitted to upstream/origin repos based on sync-ready native commits</span>
+            </div>
+            <table class="pr-table" style="width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden;">
+                <thead>
+                    <tr>
+                        <th style="background: var(--bg-tertiary); color: var(--text-secondary); font-weight: 600; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.8px; padding: 1rem 0.875rem; border-bottom: 2px solid var(--border); text-align: left; width: 50px;">#</th>
+                        <th style="background: var(--bg-tertiary); color: var(--text-secondary); font-weight: 600; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.8px; padding: 1rem 0.875rem; border-bottom: 2px solid var(--border); text-align: left;">Repository</th>
+                        <th style="background: var(--bg-tertiary); color: var(--text-secondary); font-weight: 600; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.8px; padding: 1rem 0.875rem; border-bottom: 2px solid var(--border); text-align: left;">Pull Request</th>
+                        <th style="background: var(--bg-tertiary); color: var(--text-secondary); font-weight: 600; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.8px; padding: 1rem 0.875rem; border-bottom: 2px solid var(--border); text-align: left;">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="prTableBody"></tbody>
+            </table>
+        </div>
+
         <footer>
             <p>Research artifact for fork synchronization analysis • Data updated weekly</p>
         </footer>
@@ -1055,6 +1073,67 @@
         }
 
         loadData();
+
+        // PR Submissions Table
+        (function renderPRTable() {
+            const prData = [
+                { num: 1, url: 'https://github.com/containers/crun/pull/1953', status: 'pending' },
+                { num: 2, url: 'https://github.com/Whisky-App/wine/pull/22', status: 'pending' },
+                { num: 3, url: 'https://github.com/liigo/libuv-vc6/pull/1', status: 'merged' },
+                { num: 4, url: 'https://github.com/spdk/spdk/pull/3812', status: 'pending' },
+                { num: 5, url: 'https://github.com/reactos/reactos/pull/8607', status: 'pending' },
+                { num: 6, url: 'https://github.com/hathach/tinyusb/pull/3466', status: 'pending' },
+                { num: 7, url: 'https://github.com/86Box/86Box/pull/6732', status: 'pending' },
+                { num: 8, url: 'https://github.com/google/pebble/pull/4', status: 'pending' },
+                { num: 9, url: 'https://github.com/google/pebble/pull/5', status: 'pending' },
+                { num: 10, url: 'https://github.com/google/pebble/pull/6', status: 'pending' },
+                { num: 11, url: 'https://github.com/google/pebble/pull/7', status: 'pending' },
+                { num: 12, url: 'https://github.com/google/pebble/pull/8', status: 'pending' },
+                { num: 13, url: 'https://github.com/google/pebble/pull/9', status: 'pending' },
+                { num: 14, url: 'https://github.com/google/pebble/pull/10', status: 'pending' },
+                { num: 15, url: 'https://github.com/google/pebble/pull/11', status: 'pending' },
+                { num: 16, url: 'https://github.com/google/pebble/pull/12', status: 'pending' },
+                { num: 17, url: 'https://github.com/google/pebble/pull/13', status: 'pending' },
+                { num: 18, url: 'https://github.com/google/pebble/pull/14', status: 'pending' },
+                { num: 19, url: 'https://github.com/google/pebble/pull/15', status: 'pending' },
+                { num: 20, url: 'https://github.com/google/pebble/pull/16', status: 'pending' },
+                { num: 21, url: 'https://github.com/google/pebble/pull/17', status: 'pending' },
+                { num: 22, url: 'https://github.com/google/pebble/pull/18', status: 'pending' },
+                { num: 23, url: 'https://github.com/LumaTeam/Luma3DS/pull/2210', status: 'pending' },
+                { num: 24, url: 'https://github.com/medusalix/xone/pull/74', status: 'pending' },
+                { num: 25, url: 'https://github.com/openmv/openmv/pull/2967', status: 'pending' },
+                { num: 26, url: 'https://github.com/tianocore/edk2/pull/12013', status: 'pending' },
+                { num: 27, url: 'https://github.com/tianocore/edk2/pull/12014', status: 'pending' },
+                { num: 28, url: 'https://github.com/openzfs/zfs/pull/18158', status: 'pending' },
+                { num: 29, url: 'https://github.com/reactos/reactos/pull/8642', status: 'pending' },
+                { num: 30, url: 'https://github.com/tianocore/edk2/pull/12051', status: 'pending' },
+                { num: 31, url: 'https://github.com/u-boot/u-boot/pull/854', status: 'pending' },
+                { num: 32, url: 'https://github.com/spdk/spdk/pull/3818', status: 'pending' },
+                { num: 33, url: 'https://github.com/swaywm/sway/pull/9014', status: 'pending' },
+                { num: 34, url: 'https://github.com/blackmagic-debug/blackmagic/pull/2177', status: 'pending' },
+                { num: 35, url: 'https://github.com/containers/crun/pull/1961', status: 'pending' },
+                { num: 36, url: 'https://github.com/mbed-ce/mbed-os/pull/536', status: 'pending' },
+                { num: 37, url: 'https://github.com/BandarHL/BHTwitter/pull/359', status: 'pending' }
+            ];
+
+            const tbody = document.getElementById('prTableBody');
+            const cellStyle = 'padding: 0.875rem; border-bottom: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary); vertical-align: middle;';
+
+            tbody.innerHTML = prData.map(pr => {
+                const match = pr.url.match(/github\.com\/([^/]+\/[^/]+)\/pull\/(\d+)/);
+                const repo = match ? match[1] : '-';
+                const prNum = match ? '#' + match[2] : '-';
+                const statusBadge = pr.status === 'merged'
+                    ? '<span class="badge badge-fix">Merged</span>'
+                    : '<span class="badge badge-other">Pending</span>';
+                return `<tr>
+                    <td style="${cellStyle} font-weight: 600; color: var(--text-muted);">${pr.num}</td>
+                    <td style="${cellStyle}"><span style="font-weight: 600;">${repo}</span></td>
+                    <td style="${cellStyle}"><a href="${pr.url}" target="_blank" class="commit-link">${prNum}</a></td>
+                    <td style="${cellStyle}">${statusBadge}</td>
+                </tr>`;
+            }).join('');
+        })();
     </script>
 </body>
 </html>
