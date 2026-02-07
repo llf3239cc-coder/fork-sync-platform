@@ -539,57 +539,47 @@
         </div>
 
         <div class="stats-grid">
-            <div class="stat-card">
+            <div class="stat-card" style="cursor: pointer;" onclick="document.getElementById('growthSection').scrollIntoView({behavior: 'smooth'})">
                 <div class="icon">🔍</div>
                 <div class="label">Native Commits Screened</div>
                 <div class="value" id="screenedCount">-</div>
             </div>
-            <div class="stat-card warning">
+            <div class="stat-card warning" style="cursor: pointer;" onclick="document.getElementById('pipelineSection').scrollIntoView({behavior: 'smooth'})">
                 <div class="icon">📊</div>
                 <div class="label">Native Commits Analyzed</div>
                 <div class="value" id="totalCommits">-</div>
             </div>
-            <div class="stat-card success">
+            <div class="stat-card success" style="cursor: pointer;" onclick="document.getElementById('commitsTableSection').scrollIntoView({behavior: 'smooth'})">
                 <div class="icon">✅</div>
                 <div class="label">Sync-Ready Native</div>
                 <div class="value" id="recommendedCount">-</div>
             </div>
-            <div class="stat-card danger">
-                <div class="icon">🛡️</div>
-                <div class="label">CVE Fixes</div>
-                <div class="value" id="cveCount">-</div>
+            <div class="stat-card danger" style="cursor: pointer;" onclick="document.getElementById('securityCommitsSection').scrollIntoView({behavior: 'smooth'})">
+                <div class="icon">🔒</div>
+                <div class="label">Security Syncable</div>
+                <div class="value" id="securitySyncableCount">-</div>
             </div>
-            <div class="stat-card">
-                <div class="icon">🔀</div>
-                <div class="label">Fork Repos</div>
-                <div class="value" id="forkCount">-</div>
-            </div>
-            <div class="stat-card">
-                <div class="icon">🏠</div>
-                <div class="label">Origin Repos</div>
-                <div class="value" id="originCount">-</div>
-            </div>
-            <div class="stat-card warning">
-                <div class="icon">🧪</div>
-                <div class="label">With Tests</div>
-                <div class="value" id="testCount">-</div>
+            <div class="stat-card" style="cursor: pointer;" onclick="document.getElementById('categorySection').scrollIntoView({behavior: 'smooth'})">
+                <div class="icon">📂</div>
+                <div class="label">Categories</div>
+                <div class="value" id="categoryCount">5</div>
             </div>
         </div>
 
         <!-- Growth Chart - Full Width -->
         <div class="charts-grid full-width">
-            <div class="chart-card">
-                <h3>Sync-Ready Native Commits Over Time (Weekly Crawl)</h3>
+            <div class="chart-card" id="growthSection">
+                <h3>Native Commits Over Time (Weekly Crawl)</h3>
                 <canvas id="growthChart" height="100"></canvas>
             </div>
         </div>
 
         <div class="charts-grid">
-            <div class="chart-card">
+            <div class="chart-card" id="pipelineSection">
                 <h3>Screening Pipeline</h3>
                 <canvas id="pipelineChart"></canvas>
             </div>
-            <div class="chart-card">
+            <div class="chart-card" id="categorySection">
                 <h3>Classification Categories</h3>
                 <canvas id="categoryChart"></canvas>
             </div>
@@ -600,7 +590,7 @@
                 <h3>Promotion Confidence Distribution</h3>
                 <canvas id="confidenceChart"></canvas>
             </div>
-            <div class="chart-card">
+            <div class="chart-card" id="securityCommitsSection">
                 <h3>Security-Related Syncable Commits</h3>
                 <div id="cveCommitsList" class="cve-commits-list">
                     <p class="loading-text">Loading security-related syncable commits...</p>
@@ -608,7 +598,7 @@
             </div>
         </div>
 
-        <div class="table-container">
+        <div class="table-container" id="commitsTableSection">
             <div class="table-header">
                 <h3>Native Commit Recommendations</h3>
                 <div class="filter-row">
@@ -760,7 +750,6 @@
             // Calculate stats
             const totalAnalyzed = allData.length;
             const recommended = allData.filter(d => d.classification_recommend_for_origin_and_forks === 'TRUE').length;
-            const cveCount = allData.filter(d => d.has_cve === 'TRUE').length;
             const withTests = allData.filter(d => d.has_test_file === 'TRUE').length;
             const forkRepos = new Set(allData.map(d => d.fork_repo)).size;
             const originRepos = new Set(allData.map(d => d.origin_repo)).size;
@@ -772,33 +761,47 @@
             document.getElementById('screenedCount').textContent = screenedCount.toLocaleString();
             document.getElementById('totalCommits').textContent = totalAnalyzed.toLocaleString();
             document.getElementById('recommendedCount').textContent = recommended.toLocaleString();
-            document.getElementById('cveCount').textContent = cveCount.toLocaleString();
-            document.getElementById('forkCount').textContent = forkRepos.toLocaleString();
-            document.getElementById('originCount').textContent = originRepos.toLocaleString();
-            document.getElementById('testCount').textContent = withTests.toLocaleString();
 
-            // Growth Chart (Line chart showing sync-ready commits over time)
-            const historicalData = generateHistoricalData(recommended);
+            // Growth Chart (Line chart showing screened and sync-ready commits over time)
+            const syncReadyData = generateHistoricalData(recommended);
+            const screenedData = generateHistoricalData(screenedCount);
             growthChart = new Chart(document.getElementById('growthChart'), {
                 type: 'line',
                 data: {
-                    datasets: [{
-                        label: 'Sync-Ready Native Commits',
-                        data: historicalData,
-                        borderColor: '#10b981',
-                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                        fill: true,
-                        tension: 0.4,
-                        pointRadius: 3,
-                        pointHoverRadius: 8,
-                        pointBackgroundColor: '#10b981',
-                        pointBorderColor: '#ffffff',
-                        pointBorderWidth: 2,
-                        pointHoverBackgroundColor: '#059669',
-                        pointHoverBorderColor: '#ffffff',
-                        pointHoverBorderWidth: 3,
-                        borderWidth: 3
-                    }]
+                    datasets: [
+                        {
+                            label: 'Native Commits Screened',
+                            data: screenedData,
+                            borderColor: '#94a3b8',
+                            backgroundColor: 'rgba(148, 163, 184, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 2,
+                            pointHoverRadius: 6,
+                            pointBackgroundColor: '#94a3b8',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            borderWidth: 2,
+                            borderDash: [5, 5]
+                        },
+                        {
+                            label: 'Sync-Ready Native Commits',
+                            data: syncReadyData,
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 3,
+                            pointHoverRadius: 8,
+                            pointBackgroundColor: '#10b981',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointHoverBackgroundColor: '#059669',
+                            pointHoverBorderColor: '#ffffff',
+                            pointHoverBorderWidth: 3,
+                            borderWidth: 3
+                        }
+                    ]
                 },
                 options: {
                     responsive: true,
@@ -807,7 +810,11 @@
                         intersect: false
                     },
                     plugins: {
-                        legend: { display: false },
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: { color: colors.text, usePointStyle: true, pointStyle: 'line', font: { weight: '600' } }
+                        },
                         tooltip: {
                             enabled: true,
                             backgroundColor: 'rgba(15, 23, 42, 0.9)',
@@ -817,10 +824,9 @@
                             bodyFont: { size: 13 },
                             padding: 12,
                             cornerRadius: 8,
-                            displayColors: false,
+                            displayColors: true,
                             callbacks: {
-                                title: (items) => items[0].raw.x.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }),
-                                label: (item) => `📊 ${item.raw.y.toLocaleString()} sync-ready native commits`
+                                title: (items) => items[0].raw.x.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })
                             }
                         }
                     },
@@ -932,6 +938,9 @@
                     const secData = await resp.json();
                     const secCommits = secData.commits || [];
                     const totalSyncableUnits = secData.total_syncable_units || 0;
+
+                    // Update the stat card count
+                    document.getElementById('securitySyncableCount').textContent = secCommits.length.toLocaleString();
 
                     if (secCommits.length === 0) {
                         cveListContainer.innerHTML = '<p class="no-cve">No security-related syncable commits found</p>';
