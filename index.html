@@ -451,7 +451,7 @@
         [data-theme="dark"] .recommend-no { color: #f87171; }
 
         /* CVE Commits List */
-        .cve-commits-list { max-height: 300px; overflow-y: auto; }
+        .cve-commits-list { max-height: 500px; overflow-y: auto; }
         .cve-commits-list .loading-text { color: var(--text-muted); text-align: center; padding: 2rem; }
         .cve-commits-list .no-cve { color: var(--text-muted); text-align: center; padding: 2rem; font-style: italic; }
         .cve-commit-item {
@@ -478,6 +478,14 @@
         .cve-summary-icon { font-size: 1.75rem; }
         .cve-summary-text { font-size: 0.9rem; color: var(--text-primary); }
         .cve-summary-text strong { color: var(--danger); }
+        .cve-commit-stats { display: flex; gap: 0.75rem; margin-top: 0.35rem; flex-wrap: wrap; }
+        .cve-commit-stat { font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 4px; }
+        .cve-commit-stat.syncable { background: rgba(16, 185, 129, 0.15); color: #059669; }
+        .cve-commit-stat.unsyncable { background: rgba(239, 68, 68, 0.1); color: #dc2626; }
+        [data-theme="dark"] .cve-commit-stat.syncable { color: #34d399; }
+        [data-theme="dark"] .cve-commit-stat.unsyncable { color: #f87171; }
+        .cve-syncable-repos { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.35rem; }
+        .cve-syncable-repo-tag { font-size: 0.65rem; font-weight: 600; padding: 0.1rem 0.45rem; border-radius: 4px; background: rgba(59, 130, 246, 0.1); color: var(--primary); border: 1px solid rgba(59, 130, 246, 0.2); }
 
         /* Footer */
         footer { text-align: center; padding: 2.5rem; color: var(--text-muted); font-size: 0.85rem; font-weight: 500; }
@@ -593,9 +601,9 @@
                 <canvas id="confidenceChart"></canvas>
             </div>
             <div class="chart-card">
-                <h3>CVE-Related Native Commits</h3>
+                <h3>Security-Related Syncable Commits</h3>
                 <div id="cveCommitsList" class="cve-commits-list">
-                    <p class="loading-text">Loading CVE native commits...</p>
+                    <p class="loading-text">Loading security-related syncable commits...</p>
                 </div>
             </div>
         </div>
@@ -915,39 +923,56 @@
                 }
             });
 
-            // CVE Commits List
-            const cveCommits = allData.filter(d => d.has_cve === 'TRUE');
-            const cveListContainer = document.getElementById('cveCommitsList');
+            // Security-Related Syncable Commits List (loaded from separate file)
+            loadSecurityCommits();
+            async function loadSecurityCommits() {
+                const cveListContainer = document.getElementById('cveCommitsList');
+                try {
+                    const resp = await fetch('data/RQ4_syncability_mining/security_syncable_commits.json');
+                    const secData = await resp.json();
+                    const secCommits = secData.commits || [];
+                    const totalSyncableUnits = secData.total_syncable_units || 0;
 
-            if (cveCommits.length === 0) {
-                cveListContainer.innerHTML = '<p class="no-cve">No CVE-related native commits found in current dataset</p>';
-            } else {
-                let html = `<div class="cve-summary">
-                    <span class="cve-summary-icon">🛡️</span>
-                    <span class="cve-summary-text"><strong>${cveCommits.length}</strong> CVE-related native commit${cveCommits.length !== 1 ? 's' : ''} identified</span>
-                </div>`;
+                    if (secCommits.length === 0) {
+                        cveListContainer.innerHTML = '<p class="no-cve">No security-related syncable commits found</p>';
+                        return;
+                    }
 
-                cveCommits.forEach(commit => {
-                    const shortHash = commit.commit_hash ? commit.commit_hash.substring(0, 7) : '-';
-                    const url = commit.github_commit_url ?
-                        (commit.github_commit_url.startsWith('http') ? commit.github_commit_url : 'https://' + commit.github_commit_url) : '#';
-                    const forkRepo = commit.fork_repo ? commit.fork_repo.split('/').pop() : '-';
-                    const isRecommended = commit.classification_recommend_for_origin_and_forks === 'TRUE';
-
-                    html += `<div class="cve-commit-item">
-                        <span class="cve-commit-icon">${isRecommended ? '✅' : '⚠️'}</span>
-                        <div class="cve-commit-details">
-                            <div class="cve-commit-header">
-                                <a href="${url}" target="_blank" class="cve-commit-hash">${shortHash}</a>
-                                <span class="cve-commit-repo">in ${forkRepo}</span>
-                                ${isRecommended ? '<span class="badge badge-fix">Sync-Ready</span>' : ''}
-                            </div>
-                            <div class="cve-commit-message" title="${commit.commit_message || ''}">${commit.commit_message || 'No message available'}</div>
-                        </div>
+                    let html = `<div class="cve-summary">
+                        <span class="cve-summary-icon">🛡️</span>
+                        <span class="cve-summary-text"><strong>${secCommits.length}</strong> security-related syncable commits across <strong>${totalSyncableUnits}</strong> sync opportunities</span>
                     </div>`;
-                });
 
-                cveListContainer.innerHTML = html;
+                    secCommits.forEach(commit => {
+                        const shortHash = commit.commit_hash ? commit.commit_hash.substring(0, 7) : '-';
+                        const forkRepo = commit.fork_repo || '-';
+                        const originRepo = commit.origin_repo || '-';
+                        const url = `https://github.com/${commit.fork_repo}/commit/${commit.commit_hash}`;
+                        const syncableRepos = commit.syncable_repos || [];
+
+                        html += `<div class="cve-commit-item">
+                            <span class="cve-commit-icon">🔒</span>
+                            <div class="cve-commit-details">
+                                <div class="cve-commit-header">
+                                    <a href="${url}" target="_blank" class="cve-commit-hash">${shortHash}</a>
+                                    <span class="cve-commit-repo">${forkRepo} → ${originRepo}</span>
+                                </div>
+                                <div class="cve-commit-stats">
+                                    <span class="cve-commit-stat syncable">Syncable: ${commit.syncable}</span>
+                                    <span class="cve-commit-stat unsyncable">Unsyncable: ${commit.unsyncable}</span>
+                                </div>
+                                <div class="cve-syncable-repos">
+                                    ${syncableRepos.map(r => `<span class="cve-syncable-repo-tag">${r}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>`;
+                    });
+
+                    cveListContainer.innerHTML = html;
+                } catch (err) {
+                    console.error('Error loading security commits:', err);
+                    cveListContainer.innerHTML = '<p class="no-cve">Error loading security-related syncable commits</p>';
+                }
             }
 
             // Populate category filter with representative categories
