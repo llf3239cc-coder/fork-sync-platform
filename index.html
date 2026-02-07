@@ -1160,6 +1160,9 @@
                 { num: 73, url: 'https://github.com/tomojitakasu/RTKLIB/pull/783', status: 'pending' }
             ];
 
+            // Sort: merged first, then pending
+            prData.sort((a, b) => (a.status === 'merged' ? 0 : 1) - (b.status === 'merged' ? 0 : 1));
+
             const tbody = document.getElementById('prTableBody');
             const cellStyle = 'padding: 0.875rem; border-bottom: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary); vertical-align: middle;';
 
